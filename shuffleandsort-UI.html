@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .row::after {
+            clear: both;
+        }
+
+        [class*="col-"] {
+            float: left;
+            padding: 5px;
+        }
+
+        html {
+            /* Using this font since none was specified in particular */
+            font-family: sans-serif;
+            background-color: #EFEFEF;
+        }
+
+        .header {
+            padding: 10px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        .aside {
+            padding: 5px;
+            text-align: center;
+            display: grid;
+        }
+
+        .col-3 {
+            width: 25%;
+            float: right;
+        }
+
+        .col-9 {
+            width: 75%;
+        }
+
+        #tiles div {
+            display: flex;
+            min-width: 33%;
+            height: 22vw;
+            justify-content: center;
+            align-items: center;
+            color: #FFFFFF;
+            font-size: 10vw;
+            max-height: 250px;
+        }
+
+        #tiles {
+            display: flex;
+            text-align: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .button {
+            background-color: #72C3DC;
+            border: transparent;
+            border-radius: 10px;
+            padding: 16px;
+            font-size: 14px;
+            color: #FFFFFF;
+            margin: 5px 0px;
+            border-bottom: 5px solid #2B8EAD;
+        }
+
+        #div0 {
+            background-color: #6F98A8;
+            border-left: #6F98A8 10px solid;
+        }
+
+        #div1 {
+            background-color: #2B8EAD;
+            border-left: #2B8EAD 10px solid;
+        }
+
+        #div2 {
+            background-color: #2F454E;
+            border-left: #2F454E 10px solid;
+        }
+
+        #div3 {
+            background-color: #2B8EAD;
+            border-left: #2B8EAD 10px solid;
+        }
+
+        #div4 {
+            background-color: #2F454E;
+            border-left: #2F454E 10px solid;
+        }
+
+        #div5 {
+            background-color: #BFBFBF;
+            border-left: #BFBFBF 10px solid;
+        }
+
+        #div6 {
+            background-color: #BFBFBF;
+            border-left: #BFBFBF 10px solid;
+        }
+
+        #div7 {
+            background-color: #6F98A8;
+            border-left: #6F98A8 10px solid;
+        }
+
+        #div8 {
+            background-color: #2F454E;
+            border-left: #2F454E 10px solid;
+        }
+
+        @media only screen and (max-width: 375px) {
+            html {
+                background-color: #ffffff;
+            }
+
+            [class*="col-"] {
+                width: 100%;
+            }
+
+            #tiles div {
+                min-width: 100%;
+                height: 40px;
+                margin: 2px 0px;
+                background-color: #EFEFEF;
+                color: #000000;
+                font-size: 1em;
+            }
+
+            .col-3 .aside {
+                display: block;
+            }
+
+            .button {
+                width: 100px;
+            }
+
+            .header {
+                background-color: #333333;
+                color: #FFFFFF;
+                text-align: center;
+                margin: -8px
+            }
+        }
+    </style>
+</head>
+
+<body onload="createTile()">
+
+    <div class="header">
+       Maersk Shuffle and Sort
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <div class="aside">
+                <button class="button" onclick="shuffleSort(true)">SHUFFLE</button>
+                <button class="button" onclick="shuffleSort()">SORT</button>
+            </div>
+        </div>
+        <div class="col-9">
+            <div id="tiles">
+            </div>
+            <p style="text-align: center"><strong>by Karthik Prudhvi</strong></p>
+        </div>
+    </div>
+
+    <script>
+        // Array created globally since it is used by multiple functions
+        let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9];
+        // This function dynamically creates tiles depending on the arr length
+        const createTile = () => {
+            for (let loopCounter = 0; loopCounter < arr.length; loopCounter++) {
+                let tile = document.createElement('div');
+                tile.id = "div" + loopCounter;
+                tile.innerText = arr[loopCounter];
+                document.getElementById('tiles').appendChild(tile);
+            }
+        }
+        // function to shuffle and sort depending on flag
+        const shuffleSort = (isShuffle) => {
+            if (isShuffle) {
+                arr.sort(() => Math.random() - 0.5);
+            } else {
+                arr.sort();
+            }
+            for (let loopCounter = 0; loopCounter < arr.length; loopCounter++) {
+                let divID = "div" + loopCounter;
+                document.getElementById(divID).style.order = arr[loopCounter];
+            }
+        }
+    </script>
+</body>
+
+</html>
